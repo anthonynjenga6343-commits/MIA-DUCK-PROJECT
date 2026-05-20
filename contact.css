@@ -1,0 +1,299 @@
+/* Contact Page Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f528 0%, #f5f528 0%);
+    min-height: 100vh;
+    padding-bottom: 40px;
+}
+
+/* Navigation */
+:root {
+    /* Primary Theme Colors - YELLOW PALETTE */
+    --primary-yellow: #ffd700;
+    --primary-yellow-light: #ffed4e;
+    --primary-yellow-dark: #ffb81c;
+    
+    /* Accent Colors */
+    --dark-bg: #1a1a1a;
+    --light-bg: #f8f8f8;
+    --text-primary: #333;
+    --text-light: #666;
+    --white: #ffffff;
+    
+    /* Transitions & Effects */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow: 0 4px 20px rgba(255, 215, 0, 0.15);
+    --shadow-hover: 0 12px 40px rgba(255, 215, 0, 0.25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-primary);
+    background-color: var(--light-bg);
+    line-height: 1.6;
+}
+
+/* =====================
+   2. NAVIGATION STYLING
+   ===================== */
+
+nav {
+    /* Navigation container with yellow accent */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: var(--transition);
+}
+
+nav:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+.logo {
+    /* Mia Duck Logo */
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-yellow), var(--primary-yellow-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    /* Navigation menu list */
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    flex: 1;
+    margin-left: 60px;
+}
+
+.nav-links a {
+    /* Navigation links styling */
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-links a::after {
+    /* Underline animation effect on hover */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--primary-yellow);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-cta-oval {
+    /* Call-to-action button with yellow background */
+    background: var(--primary-yellow);
+    color: var(--dark-bg);
+    padding: 12px 28px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: var(--transition);
+    cursor: pointer;
+    border: 2px solid var(--primary-yellow);
+}
+
+.nav-cta-oval:hover {
+    background: transparent;
+    color: var(--primary-yellow);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+}
+
+/* Contact Container */
+.contact-container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.contact-container h1 {
+    color: white;
+    font-size: 48px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+/* Contact Grid */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Contact Cards */
+.contact-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.contact-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.contact-card .icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.contact-card h2 {
+    color: #333;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.phone-number {
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+    color: #667eea;
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+}
+
+.phone-number:hover {
+    color: #764ba2;
+}
+
+.label {
+    display: inline-block;
+    background: #667eea;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Reception Card - Special Styling */
+.contact-card.reception {
+    border: 3px solid #f59e0b;
+}
+
+.contact-card.reception .phone-number {
+    color: #f59e0b;
+}
+
+.contact-card.reception .label {
+    background: #f59e0b;
+}
+
+/* Social Media Card */
+.contact-card.social {
+    grid-column: 1 / -1;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.social-btn:hover {
+    transform: scale(1.1);
+}
+
+.social-btn.facebook {
+    background: #1877f2;
+    box-shadow: 0 4px 15px rgba(24, 119, 242, 0.4);
+}
+
+.social-btn.instagram {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    box-shadow: 0 4px 15px rgba(225, 48, 108, 0.4);
+}
+
+
+.social-btn.Tiktock {
+    background: linear-gradient(45deg, #191a1a, #f0eeef);
+    box-shadow: 0 4px 15px rgba(238, 29, 82, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .contact-container h1 {
+        font-size: 36px;
+    }
+
+    .phone-number {
+        font-size: 24px;
+    }
+}

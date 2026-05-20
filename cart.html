@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>My Cart – Mia Duck</title>
+<link rel="stylesheet" href="cart.css"/>
+</head>
+<body>
+    <nav>
+        <div class="logo">Mia Duck</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="cart.html">cart</a></li>
+            <li><a href="locations.html">Locations</a></li>
+            <li><a href="premium.html">Premium</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        
+    </nav>
+
+
+<!-- MAIN LAYOUT -->
+<div class="container">
+
+  <!-- LEFT: CART ITEMS + DELIVERY -->
+  <div>
+
+    <!-- Cart Items Card -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-header">
+        <h2>🛒 My Cart</h2>
+        <span class="item-count-badge" id="itemCountBadge">3 Items</span>
+      </div>
+
+      <div class="select-all-bar">
+        <input type="checkbox" id="selectAll" checked style="width:16px;height:16px;accent-color:var(--orange);cursor:pointer;" onchange="toggleAll(this)"/>
+        <label for="selectAll" style="cursor:pointer;font-weight:600;color:var(--dark);font-size:13px;">Select All Items</label>
+        <span style="margin-left:auto;">
+          <button onclick="clearSelected()" style="background:none;border:none;color:var(--red);font-size:12px;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;">🗑 Remove Selected</button>
+        </span>
+      </div>
+
+      <!-- ITEM 1 -->
+      <div class="cart-item" id="item1">
+        <div class="item-check"><input type="checkbox" class="item-checkbox" checked onchange="updateSummary()"/></div>
+        <div class="item-img">👟</div>
+        <div class="item-details">
+          <div class="item-name">Mia Duck Sport Sneakers – White/Blue</div>
+          <div class="item-variant">Size: 42 &nbsp;|&nbsp; Color: White</div>
+          <div class="in-stock-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg>
+            In Stock
+          </div>
+          <div style="margin-top:6px;">
+            <span class="item-price" data-price="1200">KES 1,200</span>
+            <span class="item-original-price">KES 2,000</span>
+            <span class="discount-badge">-40%</span>
+          </div>
+          <div class="item-actions">
+            <div class="qty-stepper">
+              <button class="qty-btn" onclick="changeQty('qty1',-1)">−</button>
+              <input class="qty-num" id="qty1" type="text" value="1" readonly/>
+              <button class="qty-btn" onclick="changeQty('qty1',1)">+</button>
+            </div>
+            <button class="item-remove" onclick="removeItem('item1')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 2 -->
+      <div class="cart-item" id="item2">
+        <div class="item-check"><input type="checkbox" class="item-checkbox" checked onchange="updateSummary()"/></div>
+        <div class="item-img">🎒</div>
+        <div class="item-details">
+          <div class="item-name">Heavy-Duty Travel Suitcase – 28 Inch</div>
+          <div class="item-variant">Color: Black &nbsp;|&nbsp; Size: 28"</div>
+          <div class="in-stock-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg>
+            In Stock
+          </div>
+          <div style="margin-top:6px;">
+            <span class="item-price" data-price="3500">KES 3,500</span>
+            <span class="item-original-price">KES 5,500</span>
+            <span class="discount-badge">-36%</span>
+          </div>
+          <div class="item-actions">
+            <div class="qty-stepper">
+              <button class="qty-btn" onclick="changeQty('qty2',-1)">−</button>
+              <input class="qty-num" id="qty2" type="text" value="1" readonly/>
+              <button class="qty-btn" onclick="changeQty('qty2',1)">+</button>
+            </div>
+            <button class="item-remove" onclick="removeItem('item2')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 3 -->
+      <div class="cart-item" id="item3">
+        <div class="item-check"><input type="checkbox" class="item-checkbox" checked onchange="updateSummary()"/></div>
+        <div class="item-img">⌚</div>
+        <div class="item-details">
+          <div class="item-name">Smart Watch – Fitness Tracker Series 5</div>
+          <div class="item-variant">Color: Black &nbsp;|&nbsp; Strap: Silicone</div>
+          <div class="in-stock-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12"/></svg>
+            In Stock
+          </div>
+          <div style="margin-top:6px;">
+            <span class="item-price" data-price="800">KES 800</span>
+            <span class="item-original-price">KES 1,500</span>
+            <span class="discount-badge">-47%</span>
+          </div>
+          <div class="item-actions">
+            <div class="qty-stepper">
+              <button class="qty-btn" onclick="changeQty('qty3',-1)">−</button>
+              <input class="qty-num" id="qty3" type="text" value="2" readonly/>
+              <button class="qty-btn" onclick="changeQty('qty3',1)">+</button>
+            </div>
+            <button class="item-remove" onclick="removeItem('item3')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- EMPTY STATE -->
+      <div class="empty-cart" id="emptyCart">
+        <div class="empty-icon">🛒</div>
+        <h3>Your cart is empty!</h3>
+        <p>Looks like you haven't added anything yet.<br/>Explore Mia Duck for deals from KES 100!</p>
+        <button class="shop-btn">Continue Shopping</button>
+      </div>
+
+    </div><!-- /cart card -->
+
+    <!-- Promo Code -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-header">
+        <h2>🏷 Promo / Voucher Code</h2>
+      </div>
+      <div class="promo-section">
+        <input class="promo-input" type="text" placeholder="Enter promo or voucher code…" id="promoInput"/>
+        <button class="promo-btn" onclick="applyPromo()">Apply</button>
+      </div>
+    </div>
+
+    <!-- Delivery & Booking Options -->
+    <div class="card">
+      <div class="card-header">
+        <h2>🚚 Delivery & Fulfilment Options</h2>
+      </div>
+      <div class="delivery-section">
+        <h3>Choose how you'd like to receive your order</h3>
+
+        <div class="delivery-options">
+
+          <!-- Option 1: Express Delivery -->
+          <label class="delivery-option active" id="opt-express" onclick="selectOption('express')">
+            <input type="radio" name="delivery" value="express" checked/>
+            <span class="active-tick">✓</span>
+            <span class="option-icon">⚡</span>
+            <span class="option-title">Express Delivery</span>
+            <span class="option-desc">Get it today or tomorrow</span>
+            <span class="option-price">KES 150</span>
+          </label>
+
+          <!-- Option 2: Standard Delivery -->
+          <label class="delivery-option" id="opt-standard" onclick="selectOption('standard')">
+            <input type="radio" name="delivery" value="standard"/>
+            <span class="active-tick">✓</span>
+            <span class="option-icon">📦</span>
+            <span class="option-title">Standard Delivery</span>
+            <span class="option-desc">2–4 business days</span>
+            <span class="option-price">FREE</span>
+          </label>
+
+          <!-- Option 3: Book Later -->
+          <label class="delivery-option" id="opt-later" onclick="selectOption('later')">
+            <input type="radio" name="delivery" value="later"/>
+            <span class="active-tick">✓</span>
+            <span class="option-icon">📅</span>
+            <span class="option-title">Book for Later</span>
+            <span class="option-desc">Choose a future date & time</span>
+            <span class="option-price">KES 100</span>
+          </label>
+
+        </div>
+
+        <!-- Date/Time picker — shown only for "Book Later" -->
+        <div class="date-picker-row" id="datePickerRow">
+          <label>📅 Preferred Date:</label>
+          <input type="date" id="deliveryDate" min=""/>
+          <select id="deliveryTime">
+            <option value="">Select Time Slot</option>
+            <option>8:00 AM – 10:00 AM</option>
+            <option>10:00 AM – 12:00 PM</option>
+            <option>12:00 PM – 2:00 PM</option>
+            <option>2:00 PM – 4:00 PM</option>
+            <option>4:00 PM – 6:00 PM</option>
+            <option>6:00 PM – 8:00 PM</option>
+          </select>
+        </div>
+
+        <!-- Delivery Address — shown for express/standard/later -->
+        <div class="address-row visible" id="addressRow">
+          <label>📍 Delivery Address</label>
+          <input type="text" placeholder="Full name" id="addrName"/>
+          <input type="text" placeholder="Phone number (e.g. 0712 345 678)" id="addrPhone"/>
+          <input type="text" placeholder="Street / Building / Apartment" id="addrStreet"/>
+          <div class="addr-row-grid">
+            <select id="addrArea">
+              <option value="">Select Area / Estate</option>
+              <optgroup label="Nairobi">
+                <option>Westlands</option>
+                <option>Kilimani</option>
+                <option>Lavington</option>
+                <option>South B / South C</option>
+                <option>Eastleigh</option>
+                <option>Umoja</option>
+                <option>Jogoo Road</option>
+                <option>CBD / City Centre</option>
+                <option>Kasarani</option>
+                <option>Ruaka</option>
+                <option>Utawala</option>
+                <option>Mlolongo</option>
+              </optgroup>
+              <optgroup label="Other Towns">
+                <option>Mombasa</option>
+                <option>Kisumu</option>
+                <option>Nyeri</option>
+                <option>Nakuru</option>
+                <option>Eldoret</option>
+              </optgroup>
+            </select>
+            <input type="text" placeholder="Additional notes (optional)"/>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /left col -->
+
+  <!-- RIGHT: ORDER SUMMARY -->
+  <div>
+    <div class="card summary-card">
+      <div class="card-header">
+        <h2>Order Summary</h2>
+      </div>
+      <div class="summary-body">
+
+        <div class="items-summary-bar" id="itemsSummaryBar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <span id="summaryItemsText">4 items selected</span>
+        </div>
+
+        <div class="summary-row">
+          <span class="label">Subtotal</span>
+          <span class="value" id="subtotalVal">KES 7,100</span>
+        </div>
+        <div class="summary-row">
+          <span class="label">Discount</span>
+          <span class="value" style="color:var(--red);" id="discountVal">− KES 3,200</span>
+        </div>
+        <div class="summary-row">
+          <span class="label">Delivery Fee</span>
+          <span class="value free" id="deliveryFeeVal">KES 150</span>
+        </div>
+        <div class="summary-row" id="promoRow" style="display:none;">
+          <span class="label">Promo Discount</span>
+          <span class="value" style="color:var(--green);" id="promoVal">− KES 0</span>
+        </div>
+
+        <hr class="summary-divider"/>
+
+        <div class="summary-total">
+          <span>Total</span>
+          <span class="total-amount" id="totalVal">KES 7,250</span>
+        </div>
+        <div class="summary-savings" id="savingsNote">🎉 You're saving KES 3,200 on this order!</div>
+
+        <button class="checkout-btn" onclick="proceedCheckout()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          Proceed to Checkout
+        </button>
+
+        <div class="secure-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color:var(--green)"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          Secure & Encrypted Checkout
+        </div>
+
+        <div class="payment-methods">
+          <span class="pay-chip mpesa">M-Pesa</span>
+          <span class="pay-chip visa">Visa</span>
+          <span class="pay-chip card">Mastercard</span>
+          <span class="pay-chip">Airtel Money</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

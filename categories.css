@@ -1,0 +1,643 @@
+/* ================================
+   CATEGORIES PAGE - MAIN STYLES
+   Theme: Yellow-based modern design
+   ================================ */
+
+/* =====================
+   1. ROOT & GLOBAL STYLES
+   ===================== */
+
+:root {
+    /* Primary Theme Colors - YELLOW PALETTE */
+    --primary-yellow: #ffd700;
+    --primary-yellow-light: #ffed4e;
+    --primary-yellow-dark: #ffb81c;
+    
+    /* Accent Colors */
+    --dark-bg: #1a1a1a;
+    --light-bg: #f8f8f8;
+    --text-primary: #333;
+    --text-light: #666;
+    --white: #ffffff;
+    
+    /* Transitions & Effects */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow: 0 4px 20px rgba(255, 215, 0, 0.15);
+    --shadow-hover: 0 12px 40px rgba(255, 215, 0, 0.25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-primary);
+    background-color: var(--light-bg);
+    line-height: 1.6;
+}
+
+/* =====================
+   2. NAVIGATION STYLING
+   ===================== */
+
+nav {
+    /* Navigation container with yellow accent */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: var(--transition);
+}
+
+nav:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+.logo {
+    /* Mia Duck Logo */
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-yellow), var(--primary-yellow-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    /* Navigation menu list */
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    flex: 1;
+    margin-left: 60px;
+}
+
+.nav-links a {
+    /* Navigation links styling */
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-links a::after {
+    /* Underline animation effect on hover */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--primary-yellow);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-cta-oval {
+    /* Call-to-action button with yellow background */
+    background: var(--primary-yellow);
+    color: var(--dark-bg);
+    padding: 12px 28px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: var(--transition);
+    cursor: pointer;
+    border: 2px solid var(--primary-yellow);
+}
+
+.nav-cta-oval:hover {
+    background: transparent;
+    color: var(--primary-yellow);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+}
+
+/* =====================
+   3. HERO SECTION
+   ===================== */
+
+.services-hero {
+    /* Hero section background */
+    position: relative;
+    height: 500px;
+    background: linear-gradient(135deg, var(--primary-yellow), var(--primary-yellow-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    /* Background overlay effect */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    opacity: 0.5;
+}
+
+.hero-content {
+    /* Main hero content container */
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--dark-bg);
+    max-width: 800px;
+    padding: 40px;
+}
+
+.hero-badge {
+    /* Trending badge display */
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    backdrop-filter: blur(10px);
+    animation: float 3s ease-in-out infinite;
+}
+
+.hero-subtitle {
+    /* Subtitle text */
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.services-hero h1 {
+    /* Main hero title */
+    font-size: 60px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+.hero-description {
+    /* Hero description text */
+    font-size: 18px;
+    margin-bottom: 30px;
+    line-height: 1.8;
+    opacity: 0.95;
+}
+
+/* =====================
+   4. CATEGORIES SECTION HEADER
+   ===================== */
+
+.categories-section,
+.categories-showcase {
+    /* Container for category sections */
+    padding: 80px 50px;
+    background: var(--white);
+}
+
+.categories-section {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 237, 78, 0.05));
+}
+
+.categories-showcase {
+    background: var(--white);
+}
+
+.categories-showcase:nth-child(even) {
+    /* Alternating background for visual interest */
+    background: var(--light-bg);
+}
+
+.categories-header {
+    /* Header area for each category section */
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.categories-subtitle {
+    /* Subtitle with yellow accent */
+    display: block;
+    color: var(--primary-yellow-dark);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.categories-title {
+    /* Main category title */
+    font-size: 48px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    color: var(--dark-bg);
+    letter-spacing: -1px;
+}
+
+.categories-description {
+    /* Description text under title */
+    font-size: 18px;
+    color: var(--text-light);
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.8;
+}
+
+/* =====================
+   5. CATEGORIES GRID LAYOUT
+   ===================== */
+
+.categories-grid {
+    /* Grid container for category cards */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+
+/* =====================
+   6. CATEGORY CARDS STYLING
+   ===================== */
+
+.categories-card {
+    /* Card header with icon */
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, var(--primary-yellow), var(--primary-yellow-light));
+    border-radius: 15px;
+    margin-bottom: 40px;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.categories-card:hover {
+    /* Hover effect for cards */
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.categories-icon {
+    /* Icon display (emoji) */
+    font-size: 48px;
+    margin-bottom: 20px;
+    display: inline-block;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.categories-card h3,
+.categories-card-title {
+    /* Card titles styling */
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: var(--dark-bg);
+    text-transform: capitalize;
+}
+
+.categories-card p,
+.categories-card-desc {
+    /* Card description text */
+    color: var(--text-light);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* =====================
+   7. INTERACTIVE CATEGORY CARDS
+   ===================== */
+
+.categories-interactive {
+    /* Container for interactive card with image */
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.categories-interactive:hover {
+    /* Enhanced hover effect */
+    transform: translateY(-15px);
+    box-shadow: var(--shadow-hover);
+}
+
+.categories-card-image {
+    /* Image container with overlay effect */
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--primary-yellow), var(--primary-yellow-light));
+}
+
+.categories-card-image img {
+    /* Product image */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.categories-interactive:hover .categories-card-image img {
+    /* Image zoom on hover */
+    transform: scale(1.1);
+}
+
+.categories-card-overlay {
+    /* Overlay on image with icon */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(26, 26, 26, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.categories-interactive:hover .categories-card-overlay {
+    /* Show overlay on hover */
+    opacity: 1;
+}
+
+.categories-icon-large {
+    /* Large icon in overlay */
+    font-size: 64px;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+/* =====================
+   8. CARD CONTENT AREA
+   ===================== */
+
+.categories-card-content {
+    /* Content area of interactive cards */
+    padding: 30px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.categories-card-content h3 {
+    /* Content title styling */
+    color: var(--dark-bg);
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.categories-card-content p {
+    /* Content description */
+    color: var(--text-light);
+    margin-bottom: 20px;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* =====================
+   9. FEATURE TAGS/LABELS
+   ===================== */
+
+.categories-features-list {
+    /* Container for feature tags */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.feature-tag {
+    /* Individual feature tag styling */
+    background: linear-gradient(135deg, var(--primary-yellow), var(--primary-yellow-light));
+    color: var(--dark-bg);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: var(--transition);
+}
+
+.feature-tag:hover {
+    /* Tag hover effect */
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+/* =====================
+   10. CALL-TO-ACTION BUTTONS
+   ===================== */
+
+.categories-card-btn,
+.btn-primary {
+    /* Primary button styling */
+    background: linear-gradient(135deg, var(--primary-yellow), var(--primary-yellow-dark));
+    color: var(--dark-bg);
+    padding: 12px 28px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-block;
+    text-align: center;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.categories-card-btn:hover,
+.btn-primary:hover {
+    /* Button hover effect */
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+    background: linear-gradient(135deg, var(--primary-yellow-dark), var(--primary-yellow));
+}
+
+.categories-card-btn:active,
+.btn-primary:active {
+    /* Button active state */
+    transform: translateY(-1px);
+}
+
+/* =====================
+   11. ANIMATIONS
+   ===================== */
+
+@keyframes bounce {
+    /* Bouncing animation for icons */
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes float {
+    /* Floating animation for badge */
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+    /* Pulsing animation for overlay icon */
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+@keyframes slideIn {
+    /* Slide in animation for cards */
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply slide-in animation to cards */
+.categories-interactive,
+.categories-card {
+    animation: slideIn 0.6s ease-out forwards;
+}
+
+.categories-interactive:nth-child(1) { animation-delay: 0.1s; }
+.categories-interactive:nth-child(2) { animation-delay: 0.2s; }
+.categories-interactive:nth-child(3) { animation-delay: 0.3s; }
+
+/* =====================
+   12. RESPONSIVE DESIGN
+   ===================== */
+
+@media (max-width: 768px) {
+    /* Tablet screen adjustments */
+    
+    nav {
+        flex-direction: column;
+        padding: 15px 20px;
+        gap: 15px;
+    }
+    
+    .nav-links {
+        margin-left: 0;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .services-hero {
+        height: 350px;
+    }
+    
+    .services-hero h1 {
+        font-size: 40px;
+    }
+    
+    .categories-title {
+        font-size: 36px;
+    }
+    
+    .categories-section,
+    .categories-showcase {
+        padding: 50px 25px;
+    }
+    
+    .categories-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Mobile screen adjustments */
+    
+    .logo {
+        font-size: 20px;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .services-hero h1 {
+        font-size: 28px;
+    }
+    
+    .hero-description {
+        font-size: 14px;
+    }
+    
+    .categories-title {
+        font-size: 28px;
+    }
+    
+    .categories-description {
+        font-size: 14px;
+    }
+    
+    .categories-section,
+    .categories-showcase {
+        padding: 30px 15px;
+    }
+    
+    .categories-card-content {
+        padding: 20px;
+    }
+    
+    .feature-tag {
+        font-size: 11px;
+    }
+    
+    .categories-card-btn,
+    .btn-primary {
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+}
+
+/* =====================
+   13. UTILITY CLASSES
+   ===================== */
+
+/* Yellow gradient text effect */
+.gradient-text {
+    background: linear-gradient(135deg, var(--primary-yellow), var(--primary-yellow-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Shadow effect class */
+.shadow-lg {
+    box-shadow: var(--shadow-hover);
+}
+
+/* Transition helper */
+.transition-all {
+    transition: var(--transition);
+}
