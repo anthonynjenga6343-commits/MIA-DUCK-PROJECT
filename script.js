@@ -338,6 +338,31 @@ function closePaymentModal() {
   modal.style.display = 'none';
 }
 
+function setupMobileNav() {
+  document.querySelectorAll('.nav-toggle').forEach(button => {
+    const nav = button.closest('nav');
+    if (!nav) return;
+    const links = nav.querySelector('.nav-links');
+    if (!links) return;
+
+    button.addEventListener('click', () => {
+      const open = links.classList.toggle('mobile-active');
+      button.classList.toggle('open', open);
+    });
+
+    links.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (links.classList.contains('mobile-active')) {
+          links.classList.remove('mobile-active');
+          button.classList.remove('open');
+        }
+      });
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', setupMobileNav);
+
 // Validate minimal fields and show confirmation toast
 function handlePaymentSubmit(method) {
   const name = (document.getElementById('pay_name') || {}).value || '';
