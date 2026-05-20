@@ -10,7 +10,7 @@
     <nav>
         <div class="logo">Mia Duck</div>
         <ul class="nav-links">
-            <li><a href="home.html">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="categories.html">Categories</a></li>
             <li><a href="cart.html">cart</a></li>
             <li><a href="locations.html">Locations</a></li>
@@ -22,7 +22,7 @@
 
 
 <!-- MAIN LAYOUT -->
-<div class="container">
+<div class="container" id="cart">
 
   <!-- LEFT: CART ITEMS + DELIVERY -->
   <div>
@@ -299,10 +299,12 @@
         </div>
 
         <div class="payment-methods">
-          <span class="pay-chip mpesa">M-Pesa</span>
-          <span class="pay-chip visa">Visa</span>
-          <span class="pay-chip card">Mastercard</span>
-          <span class="pay-chip">Airtel Money</span>
+          <!-- Payment method buttons. data-method values used by script to
+               decide which fields to ask for when user clicks a method. -->
+          <button type="button" class="pay-chip mpesa" data-method="mpesa">M-Pesa</button>
+          <button type="button" class="pay-chip visa" data-method="visa">Visa</button>
+          <button type="button" class="pay-chip card" data-method="card">Mastercard</button>
+          <button type="button" class="pay-chip airtel" data-method="airtel">Airtel Money</button>
         </div>
 
       </div>
@@ -315,5 +317,23 @@
 <div class="toast" id="toast"></div>
 
 <script src="script.js"></script>
+</body>
+</html>
+
+<!-- Payment modal: injected here so cart page can ask for payment details -->
+<div id="paymentModal" style="display:none;position:fixed;inset:0;z-index:9998;">
+  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.5);" onclick="closePaymentModal()"></div>
+  <div style="position:relative;max-width:420px;margin:80px auto;background:#fff;border-radius:8px;padding:18px;box-shadow:0 8px 30px rgba(0,0,0,0.3);z-index:9999;">
+    <button type="button" onclick="closePaymentModal()" style="position:absolute;right:10px;top:8px;border:none;background:none;font-size:20px;cursor:pointer;">×</button>
+    <h3 id="paymentTitle">Payment</h3>
+    <form id="paymentForm">
+      <div id="paymentFields"></div>
+      <div style="margin-top:14px;display:flex;gap:8px;justify-content:flex-end;">
+        <button type="submit" class="checkout-btn">Submit</button>
+        <button type="button" class="btn-secondary" onclick="closePaymentModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
 </body>
 </html>
