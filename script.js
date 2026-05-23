@@ -111,10 +111,10 @@ function closeMiniCart() {
 // explicit data attributes (data-id, data-price) on the anchor.
 // Returns an object with { id, name, price } suitable for addToCart().
 function inferProductInfo(anchor) {
-  const container = anchor.closest('.product-card, .categories-card, .category-card, .categories-interactive, .location-card, .category-content, .categories-card-content') || document.body;
+  const container = anchor.closest('.product-card, .categories-card, .category-card, .categories-interactive, .location-card, .category-content, .categories-card-content, .premium-card') || document.body;
   const nameEl = container.querySelector('h3, h2, .category-title, .categories-card-title, .categories-card-title');
   const name = nameEl ? nameEl.textContent.trim() : document.title;
-  const priceEl = container.querySelector('.price-amount, [data-price], .item-price, .price');
+  const priceEl = container.querySelector('.price-amount, [data-price], .item-price, .price, .premium-price');
   let price = 1000; // fallback price
   if (priceEl) {
     const val = priceEl.getAttribute('data-price') || priceEl.textContent;
