@@ -34,66 +34,101 @@ body {
    2. NAVIGATION STYLING
    ===================== */
 
+/* =====================
+   2. NAVIGATION STYLING
+   ===================== */
+
+/* Dropdown wrapper */
+.nav-links li.dropdown {
+  position: relative;
+}
+
+/* Hide dropdown by default */
+.nav-links .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  min-width: 180px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  padding: 8px 0;
+  z-index: 1000;
+  list-style: none;
+  margin: 0;
+}
+
+/* Show on hover */
+.nav-links li.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Dropdown items */
+.nav-links .dropdown-menu li a {
+  display: block;
+  padding: 10px 16px;
+  white-space: nowrap;
+  color: #333;
+  text-decoration: none;
+}
+
+.nav-links .dropdown-menu li a:hover {
+  background-color: #f5f5f5;
+}
+
+/* Arrow icon */
+.nav-links .arrow {
+  font-size: 10px;
+  margin-left: 4px;
+}
+
 nav {
-    /* Navigation container with yellow accent */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
-    background: var(--white);
-    box-shadow: var(--shadow);
+    gap: 20px;
+    padding: 22px 48px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-soft);
     position: sticky;
     top: 0;
-    z-index: 100;
-    transition: var(--transition);
-}
-
-nav:hover {
-    box-shadow: var(--shadow-hover);
+    z-index: 99;
 }
 
 .logo {
-    /* Mia Duck Logo */
     font-size: 28px;
     font-weight: 800;
     background: linear-gradient(135deg, var(--primary-yellow), var(--primary-yellow-dark));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: 2px;
 }
 
 .nav-links {
-    /* Navigation menu list */
     display: flex;
     list-style: none;
-    gap: 30px;
-    flex: 1;
-    margin-left: 60px;
+    gap: 28px;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .nav-links a {
-    /* Navigation links styling */
     color: var(--text-primary);
-    text-decoration: none;
+    padding: 8px 10px;
     font-weight: 600;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: var(--transition);
     position: relative;
 }
 
 .nav-links a::after {
-    /* Underline animation effect on hover */
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -2px;
     left: 0;
     width: 0;
     height: 3px;
     background: var(--primary-yellow);
-    border-radius: 2px;
-    transition: width 0.3s ease;
+    transition: width 0.28s ease;
 }
 
 .nav-links a:hover::after {
@@ -101,23 +136,17 @@ nav:hover {
 }
 
 .nav-cta-oval {
-    /* Call-to-action button with yellow background */
-    background: var(--primary-yellow);
+    background: linear-gradient(135deg, var(--primary-yellow), var(--primary-yellow-dark));
     color: var(--dark-bg);
-    padding: 12px 28px;
-    border-radius: 25px;
-    text-decoration: none;
+    padding: 12px 26px;
+    border-radius: 30px;
     font-weight: 700;
     transition: var(--transition);
-    cursor: pointer;
-    border: 2px solid var(--primary-yellow);
 }
 
 .nav-cta-oval:hover {
-    background: transparent;
-    color: var(--primary-yellow);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+    box-shadow: var(--shadow);
 }
 
 .nav-toggle {
@@ -201,7 +230,6 @@ nav:hover {
         margin-top: 12px;
     }
 }
-
 
 /* Hero Section Styles */
 .hero {
@@ -785,7 +813,7 @@ nav:hover {
     width: 100%;
 }
 
-.footer-book-btn {
+.button-secondary {
     display: inline-block;
     padding: 14px 35px;
     background: linear-gradient(135deg, #ff6347, #ff8c69);
@@ -801,7 +829,7 @@ nav:hover {
     overflow: hidden;
 }
 
-.footer-book-btn::before {
+.button-secondary::before {
     content: '';
     position: absolute;
     top: 0;
@@ -813,12 +841,12 @@ nav:hover {
     transition: opacity 0.3s ease;
 }
 
-.footer-book-btn:hover {
+.button-secondary:hover {
     transform: translateY(-4px) scale(1.02);
     box-shadow: 0 12px 35px rgba(255, 99, 71, 0.5);
 }
 
-.footer-book-btn:hover::before {
+.button-secondary::before {
     opacity: 1;
 }
 

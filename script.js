@@ -31,6 +31,78 @@ function addToCart(item) {
   else cart.push({ id: item.id || ('i'+Date.now()), name: item.name || 'Item', price: item.price || 1000, origPrice: item.origPrice || Math.round((item.price||1000)*1.5), qty: item.qty || 1, emoji: item.emoji || '📦' });
   saveCart(cart);
   showToast('Added "' + (item.name || 'Item') + '" to cart');
+  // update mini-cart UI (if present) and show drawer
+  updateMiniCart();
+  showMiniCart();
+}
+
+// Mini-cart drawer helpers
+function ensureMiniCart() {
+  let mc = document.getElementById('miniCart');
+  if (mc) return mc;
+  mc = document.createElement('aside');
+  mc.id = 'miniCart';
+  mc.className = 'mini-cart';
+  mc.innerHTML = `
+    <div class="mini-cart-panel">
+      <header class="mini-cart-header">
+        <strong>Your Cart</strong>
+        <button class="mini-cart-close" aria-label="Close">✕</button>
+      </header>
+      <div class="mini-cart-list" id="miniCartList"></div>
+      <footer class="mini-cart-footer">
+        <div class="mini-cart-summary">
+          <span id="miniCartCount">0 items</span>
+          <strong id="miniCartTotal">KES 0</strong>
+        </div>
+        <div class="mini-cart-actions">
+          <button id="miniContinue" class="mini-cart-btn">Continue</button>
+          <button id="miniViewCart" class="mini-cart-btn primary">View Cart</button>
+        </div>
+      </footer>
+    </div>
+  `;
+  document.body.appendChild(mc);
+  // wire close and view cart
+  mc.querySelector('.mini-cart-close').addEventListener('click', closeMiniCart);
+  mc.querySelector('#miniContinue').addEventListener('click', closeMiniCart);
+  mc.querySelector('#miniViewCart').addEventListener('click', () => { window.location.href = 'cart.html#cart'; });
+  return mc;
+}
+
+function updateMiniCart() {
+  const mc = ensureMiniCart();
+  const list = mc.querySelector('#miniCartList');
+  const cart = getCart();
+  list.innerHTML = '';
+  let total = 0, count = 0;
+  cart.slice(0,6).forEach(item => {
+    const itemEl = document.createElement('div');
+    itemEl.className = 'mini-cart-item';
+    itemEl.innerHTML = `<div class="mini-item-name">${item.name}</div><div class="mini-item-meta"><span class="mini-item-qty">x${item.qty}</span><span class="mini-item-price">KES ${item.price.toLocaleString()}</span></div>`;
+    list.appendChild(itemEl);
+    total += (item.price || 0) * (item.qty || 1);
+    count += item.qty || 0;
+  });
+  if (cart.length > 6) {
+    const more = document.createElement('div');
+    more.className = 'mini-cart-more';
+    more.textContent = `+ ${cart.length - 6} more items`;
+    list.appendChild(more);
+  }
+  mc.querySelector('#miniCartCount').textContent = count + ' item' + (count !== 1 ? 's' : '');
+  mc.querySelector('#miniCartTotal').textContent = 'KES ' + total.toLocaleString();
+}
+
+function showMiniCart() {
+  const mc = ensureMiniCart();
+  requestAnimationFrame(() => mc.classList.add('open'));
+}
+
+function closeMiniCart() {
+  const mc = document.getElementById('miniCart');
+  if (!mc) return;
+  mc.classList.remove('open');
 }
 
 // Helper: find product info from a clicked anchor by scanning ancestors
@@ -39,10 +111,10 @@ function addToCart(item) {
 // explicit data attributes (data-id, data-price) on the anchor.
 // Returns an object with { id, name, price } suitable for addToCart().
 function inferProductInfo(anchor) {
-  const container = anchor.closest('.categories-card, .category-card, .categories-interactive, .location-card, .category-content, .categories-card-content') || document.body;
+  const container = anchor.closest('.product-card, .categories-card, .category-card, .categories-interactive, .location-card, .category-content, .categories-card-content') || document.body;
   const nameEl = container.querySelector('h3, h2, .category-title, .categories-card-title, .categories-card-title');
   const name = nameEl ? nameEl.textContent.trim() : document.title;
-  const priceEl = container.querySelector('.price-amount, [data-price], .item-price');
+  const priceEl = container.querySelector('.price-amount, [data-price], .item-price, .price');
   let price = 1000; // fallback price
   if (priceEl) {
     const val = priceEl.getAttribute('data-price') || priceEl.textContent;
@@ -231,13 +303,31 @@ if (document.getElementById('deliveryDate')) {
   document.addEventListener('DOMContentLoaded', () => {
     // Attach buy-now click handlers across pages: when a link's text
     // includes "Buy Now" we infer a product and add it to cart.
+    // Attach handlers for Buy Now links (keep navigation) and Add-to-Cart buttons (stay on page)
     document.querySelectorAll('a').forEach(a => {
-      if (a.textContent && a.textContent.trim().toLowerCase().includes('buy now')) {
+      const isBuyNow = a.textContent && a.textContent.trim().toLowerCase().includes('buy now');
+      const isCartLink = a.classList.contains('add-to-cart-btn');
+
+      if (isBuyNow) {
         a.addEventListener('click', (e) => {
-          // infer product info and add to cart, then continue navigation
           const info = inferProductInfo(a);
           addToCart(info);
-          // allow link navigation to proceed to cart (no preventDefault)
+          // allow navigation to proceed
+        });
+      }
+
+      if (isCartLink) {
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const btn = a;
+          const info = inferProductInfo(a);
+          addToCart(info);
+          // visual feedback: temporary state
+          const original = btn.textContent;
+          btn.textContent = 'Added ✓';
+          btn.classList.add('added');
+          setTimeout(() => { btn.textContent = original; btn.classList.remove('added'); }, 1200);
         });
       }
     });
@@ -246,6 +336,8 @@ if (document.getElementById('deliveryDate')) {
     if (document.getElementById('cart')) renderCart();
     // select a sensible default delivery option if present
     if (document.getElementById('opt-express')) selectOption('express');
+    // populate mini-cart if items exist
+    if (getCart().length > 0) updateMiniCart();
   });
 
   // renderCart: build cart DOM from the persisted cart array

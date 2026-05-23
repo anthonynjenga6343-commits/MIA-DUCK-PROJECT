@@ -31,6 +31,56 @@ body a {
     text-decoration: none;
 }
 
+/* =====================
+   2. NAVIGATION STYLING
+   ===================== */
+
+
+   /* Dropdown wrapper */
+.nav-links li.dropdown {
+  position: relative;
+}
+
+/* Hide dropdown by default */
+.nav-links .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  min-width: 180px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  padding: 8px 0;
+  z-index: 1000;
+  list-style: none;
+  margin: 0;
+}
+
+/* Show on hover */
+.nav-links li.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Dropdown items */
+.nav-links .dropdown-menu li a {
+  display: block;
+  padding: 10px 16px;
+  white-space: nowrap;
+  color: #333;
+  text-decoration: none;
+}
+
+.nav-links .dropdown-menu li a:hover {
+  background-color: #f5f5f5;
+}
+
+/* Arrow icon */
+.nav-links .arrow {
+  font-size: 10px;
+  margin-left: 4px;
+}
+
 nav {
     display: flex;
     justify-content: space-between;

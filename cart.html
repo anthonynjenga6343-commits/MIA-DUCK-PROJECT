@@ -15,13 +15,35 @@
             <span class="bar"></span>
         </button>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="categories.html">Categories</a></li>
-            <li><a href="cart.html">cart</a></li>
-            <li><a href="locations.html">Locations</a></li>
-            <li><a href="premium.html">Premium</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+  <li><a href="index.html">Home</a></li>
+
+  <li class="dropdown">
+    <a href="categories.html">Categories <span class="arrow">&#9660;</span></a>
+    <ul class="dropdown-menu">
+      <li><a href="kitchenware.html">Kitchen Appliances</a></li>
+      <li><a href="homedecor.html">Home Decor</a></li>
+      <li><a href="stationery.html">Stationery</a></li>
+      <li><a href="beauty.html">Beauty</a></li>
+    </ul>
+  </li>
+
+  <li><a href="cart.html">Cart</a></li>
+
+  <li class="dropdown">
+    <a href="locations.html">Locations <span class="arrow">&#9660;</span></a>
+    <ul class="dropdown-menu">
+      <li><a href="locations.html#nairobi">Nairobi</a></li>
+      <li><a href="locations.html#kiambu">Kiambu</a></li>
+      <li><a href="locations.html#nakuru">Nakuru</a></li>
+        <li><a href="locations.html#roysambu">Roysambu</a></li>
+    </ul>
+  </li>
+
+  <li><a href="premium.html">Premium</a></li>
+  <li><a href="contact.html">Contact</a></li>
+</ul>
+        
+        <a href="categories.html#categories" class="nav-cta-oval">Explore Now</a>
         
     </nav>
 
@@ -325,20 +347,4 @@
 </body>
 </html>
 
-<!-- Payment modal: injected here so cart page can ask for payment details -->
-<div id="paymentModal" style="display:none;position:fixed;inset:0;z-index:9998;">
-  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.5);" onclick="closePaymentModal()"></div>
-  <div style="position:relative;max-width:420px;margin:80px auto;background:#fff;border-radius:8px;padding:18px;box-shadow:0 8px 30px rgba(0,0,0,0.3);z-index:9999;">
-    <button type="button" onclick="closePaymentModal()" style="position:absolute;right:10px;top:8px;border:none;background:none;font-size:20px;cursor:pointer;">×</button>
-    <h3 id="paymentTitle">Payment</h3>
-    <form id="paymentForm">
-      <div id="paymentFields"></div>
-      <div style="margin-top:14px;display:flex;gap:8px;justify-content:flex-end;">
-        <button type="submit" class="checkout-btn">Submit</button>
-        <button type="button" class="btn-secondary" onclick="closePaymentModal()">Cancel</button>
-      </div>
-    </form>
-  </div>
-</div>
-</body>
-</html>
+

@@ -14,14 +14,36 @@
             <span class="bar"></span>
             <span class="bar"></span>
         </button>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="categories.html">Categories</a></li>
-            <li><a href="cart.html">cart</a></li>
-            <li><a href="locations.html">Locations</a></li>
-            <li><a href="premium.html">Premium</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+       <ul class="nav-links">
+  <li><a href="index.html">Home</a></li>
+
+  <li class="dropdown">
+    <a href="categories.html">Categories <span class="arrow">&#9660;</span></a>
+    <ul class="dropdown-menu">
+      <li><a href="kitchenware.html">Kitchen Appliances</a></li>
+      <li><a href="homedecor.html">Home Decor</a></li>
+      <li><a href="stationery.html">Stationery</a></li>
+      <li><a href="beauty.html">Beauty</a></li>
+    </ul>
+  </li>
+
+  <li><a href="cart.html">Cart</a></li>
+
+  <li class="dropdown">
+    <a href="locations.html">Locations <span class="arrow">&#9660;</span></a>
+    <ul class="dropdown-menu">
+      <li><a href="locations.html#nairobi">Nairobi</a></li>
+      <li><a href="locations.html#kiambu">Kiambu</a></li>
+      <li><a href="locations.html#nakuru">Nakuru</a></li>
+      <li><a href="locations.html#roysambu">Roysambu</a></li>
+    </ul>
+  </li>
+
+  <li><a href="premium.html">Premium</a></li>
+  <li><a href="contact.html">Contact</a></li>
+</ul>
+        
+    
         <a href="categories.html#categories" class="nav-cta-oval">Explore Now</a>
     </nav>
 
@@ -41,7 +63,7 @@
 
     <main>
         <!-- Nairobi Section -->
-        <section class="location-section" id="nairobi">
+        <section class="location-section" id="nairobi" >
             <div class="section-header">
                 <span class="section-label">Nairobi</span>
                 <h2>All items available in Nairobi</h2>
@@ -52,31 +74,35 @@
                     <div class="location-icon">🏠</div>
                     <h3>Home Decor</h3>
                     <p>Stylish curtains, cushions, wall art and accent pieces to refresh every room.</p>
+                    <a href="homedecor.html" class="btn-secondary">Shop Home Decor</a>
                 </div>
                 <div class="location-card">
                     <div class="location-icon">🍳</div>
                     <h3>Kitchenware</h3>
                     <p>Cookware, utensils, storage solutions, and kitchen tools for every chef.</p>
+                    <a href="kitchenware.html" class="btn-secondary">Shop Kitchenware</a>
                 </div>
                 <div class="location-card">
                     <div class="location-icon">💄</div>
                     <h3>Beauty Products</h3>
                     <p>Skincare, makeup, hair care, and wellness items for daily self-care.</p>
+                    <a href="beauty.html" class="btn-secondary">Shop Beauty</a>
                 </div>
                 <div class="location-card">
                     <div class="location-icon">📝</div>
                     <h3>Stationery & Office</h3>
                     <p>Premium notebooks, pens, desk organizers, and office essentials ready to ship.</p>
+                    <a href="stationery.html" class="btn-secondary">Shop Stationery</a>
                 </div>
             </div>
             <div class="section-actions">
-                <a href="cart.html#cart" class="btn-primary">Buy Now</a>
+                <a href="categories.html#categories" class="nav-cta-oval">Explore Now</a>
                 <a href="cart.html" class="btn-secondary">Go to Cart</a>
             </div>
         </section>
 
         <!-- Kiambu Section -->
-        <section class="location-section alternate" id="kiambu">
+        <section class="location-section alternate" id="kiambu" >
             <div class="section-header">
                 <span class="section-label">Kiambu</span>
                 <h2>Kiambu focuses on kitchenware and home decor</h2>
@@ -87,26 +113,29 @@
                     <div class="location-icon">🍴</div>
                     <h3>Kitchenware Deals</h3>
                     <p>Top cookware, utensils, tableware, and season-ready kitchen products.</p>
+                    <a href="kitchenware.html" class="btn-secondary">Shop Kitchenware</a>
                 </div>
                 <div class="location-card">
                     <div class="location-icon">🛋️</div>
                     <h3>Home Decor Finds</h3>
                     <p>Decorative cushions, lamps, frames and accents designed for modern living rooms.</p>
+                    <a href="homedecor.html" class="btn-secondary">Shop Home Decor</a>
                 </div>
                 <div class="location-card small-card">
                     <div class="location-icon">✨</div>
                     <h3>Quick Highlight</h3>
                     <p>Fast-moving home decor and kitchen accessories available now.</p>
+                    <a href="categories.html#categories" class="btn-secondary">Explore Categories</a>
                 </div>
             </div>
             <div class="section-actions">
-                <a href="cart.html#cart" class="btn-primary">Buy Now</a>
+                <a href="categories.html#categories" class="nav-cta-oval">Explore Now</a>
                 <a href="cart.html" class="btn-secondary">Go to Cart</a>
             </div>
         </section>
 
         <!-- Roysambu Section -->
-        <section class="location-section" id="roysambu">
+        <section class="location-section" id="roysambu" id="Roysambu">
             <div class="section-header">
                 <span class="section-label">Roysambu</span>
                 <h2>Roysambu offers the same full selection as Nairobi</h2>
@@ -117,28 +146,72 @@
                     <div class="location-icon">🏡</div>
                     <h3>Home Decor</h3>
                     <p>Decor pieces that bring elegance and warmth to any home.</p>
+                    <a href="homedecor.html" class="btn-secondary">Shop Home Decor</a>
                 </div>
                 <div class="location-card">
                     <div class="location-icon">🥣</div>
                     <h3>Kitchenware</h3>
                     <p>Essential cookware, food prep tools, and modern utensils for everyday cooking.</p>
+                    <a href="kitchenware.html" class="btn-secondary">Shop Kitchenware</a>
                 </div>
                 <div class="location-card">
                     <div class="location-icon">💅</div>
                     <h3>Beauty Range</h3>
                     <p>Beauty essentials from skincare to personal care items.</p>
+                    <a href="beauty.html" class="btn-secondary">Shop Beauty</a>
                 </div>
                 <div class="location-card">
                     <div class="location-icon">📎</div>
                     <h3>Stationery</h3>
                     <p>Notebooks, planners, pens and desk items for a polished workspace.</p>
+                    <a href="stationery.html" class="btn-secondary">Shop Stationery</a>
                 </div>
             </div>
             <div class="section-actions">
-                <a href="cart.html#cart" class="btn-primary">Buy Now</a>
+                <a href="categories.html#categories" class="nav-cta-oval">Explore Now</a>
                 <a href="cart.html" class="btn-secondary">Go to Cart</a>
             </div>
         </section>
+
+         <!-- Nakuru Section -->
+        <section class="location-section" id="nakuru" >
+            <div class="section-header">
+                <span class="section-label">Nakuru</span>
+                <h2>Nakuru offers the same full selection as Nairobi</h2>
+                <p>Enjoy full access to home decor, kitchenware, beauty products, stationery, and office supplies in Nakuru.</p>
+            </div>
+            <div class="location-grid">
+                <div class="location-card">
+                    <div class="location-icon">🏡</div>
+                    <h3>Home Decor</h3>
+                    <p>Decor pieces that bring elegance and warmth to any home.</p>
+                    <a href="homedecor.html" class="btn-secondary">Shop Home Decor</a>
+                </div>
+                <div class="location-card">
+                    <div class="location-icon">🥣</div>
+                    <h3>Kitchenware</h3>
+                    <p>Essential cookware, food prep tools, and modern utensils for everyday cooking.</p>
+                    <a href="kitchenware.html" class="btn-secondary">Shop Kitchenware</a>
+                </div>
+                <div class="location-card">
+                    <div class="location-icon">💅</div>
+                    <h3>Beauty Range</h3>
+                    <p>Beauty essentials from skincare to personal care items.</p>
+                    <a href="beauty.html" class="btn-secondary">Shop Beauty</a>
+                </div>
+                <div class="location-card">
+                    <div class="location-icon">📎</div>
+                    <h3>Stationery</h3>
+                    <p>Notebooks, planners, pens and desk items for a polished workspace.</p>
+                    <a href="stationery.html" class="btn-secondary">Shop Stationery</a>
+                </div>
+            </div>
+            <div class="section-actions">
+                <a href="categories.html#categories" class="nav-cta-oval">Explore Now</a>
+                <a href="cart.html" class="btn-secondary">Go to Cart</a>
+            </div>
+        </section>
+
     </main>
 
     <footer class="page-footer">
