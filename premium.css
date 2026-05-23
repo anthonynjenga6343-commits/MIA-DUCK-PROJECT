@@ -4,15 +4,22 @@
    ============================= */
 
 :root {
+    /* Primary Theme Colors - YELLOW PALETTE */
     --primary-yellow: #ffd700;
     --primary-yellow-light: #ffed4e;
     --primary-yellow-dark: #ffb81c;
-    --dark-bg: #1b1b1b;
-    --light-bg: #fcfaf2;
-    --text-primary: #2f2f2f;
-    --text-light: #656565;
-    --shadow: 0 18px 45px rgba(255, 193, 7, 0.16);
-    --transition: all 0.28s ease;
+    
+    /* Accent Colors */
+    --dark-bg: #1a1a1a;
+    --light-bg: #f8f8f8;
+    --text-primary: #333;
+    --text-light: #666;
+    --white: #ffffff;
+    
+    /* Transitions & Effects */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow: 0 4px 20px rgba(255, 215, 0, 0.15);
+    --shadow-hover: 0 12px 40px rgba(255, 215, 0, 0.25);
 }
 
 * {
@@ -24,19 +31,15 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text-primary);
-    background: var(--light-bg);
-}
-
-body a {
-    text-decoration: none;
+    background-color: var(--light-bg);
+    line-height: 1.6;
 }
 
 /* =====================
    2. NAVIGATION STYLING
    ===================== */
 
-
-   /* Dropdown wrapper */
+/* Dropdown wrapper */
 .nav-links li.dropdown {
   position: relative;
 }
@@ -81,49 +84,67 @@ body a {
   margin-left: 4px;
 }
 
+
 nav {
+    /* Navigation container with yellow accent */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 42px;
-    background: rgba(255, 255, 255, 0.96);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    padding: 20px 50px;
+    background: var(--white);
+    box-shadow: var(--shadow);
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 100;
+    transition: var(--transition);
+}
+
+nav:hover {
+    box-shadow: var(--shadow-hover);
 }
 
 .logo {
+    /* Mia Duck Logo */
     font-size: 28px;
     font-weight: 800;
     background: linear-gradient(135deg, var(--primary-yellow), var(--primary-yellow-dark));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
 }
 
 .nav-links {
+    /* Navigation menu list */
     display: flex;
-    gap: 24px;
     list-style: none;
-    align-items: center;
+    gap: 30px;
+    flex: 1;
+    margin-left: 60px;
 }
 
 .nav-links a {
+    /* Navigation links styling */
     color: var(--text-primary);
+    text-decoration: none;
     font-weight: 600;
-    padding: 8px 10px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: var(--transition);
     position: relative;
 }
 
 .nav-links a::after {
+    /* Underline animation effect on hover */
     content: '';
     position: absolute;
-    bottom: -2px;
+    bottom: 0;
     left: 0;
     width: 0;
     height: 3px;
     background: var(--primary-yellow);
-    transition: width 0.25s ease;
+    border-radius: 2px;
+    transition: width 0.3s ease;
 }
 
 .nav-links a:hover::after {
@@ -131,17 +152,23 @@ nav {
 }
 
 .nav-cta-oval {
-    padding: 12px 26px;
-    border-radius: 28px;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--primary-yellow), var(--primary-yellow-dark));
+    /* Call-to-action button with yellow background */
+    background: var(--primary-yellow);
     color: var(--dark-bg);
+    padding: 12px 28px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 700;
     transition: var(--transition);
+    cursor: pointer;
+    border: 2px solid var(--primary-yellow);
 }
 
 .nav-cta-oval:hover {
+    background: transparent;
+    color: var(--primary-yellow);
     transform: translateY(-2px);
-    box-shadow: var(--shadow);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
 }
 
 .nav-toggle {
@@ -220,10 +247,19 @@ nav {
     }
 
     .nav-cta-oval {
-        width: 100%;
-        text-align: center;
-        margin-top: 12px;
-    }
+    background: linear-gradient(135deg, var(--primary-yellow), var(--primary-yellow-dark));
+    color: var(--dark-bg);
+    padding: 12px 26px;
+    border-radius: 30px;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.nav-cta-oval:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
 }
 
 .premium-hero {
