@@ -171,40 +171,109 @@ function injectNavSearch() {
   });
 }
 
+// Global Product Database
+// This object stores ALL products from ALL pages in the Mia Duck store.
+// Structure: { pageUrl: [{ name, price, category }, ...], ... }
+// Used by the site-wide search functionality to find products across all categories.
+const allProductsDatabase = {
+  'kitchenware.html': [
+    { name: 'High-Speed Blender', price: '500', category: 'Kitchen Appliances' },
+    { name: 'Table rag', price: '100', category: 'Kitchen Appliances' },
+    { name: 'Cutlery', price: '300', category: 'Kitchen Appliances' },
+    { name: 'Premium Toaster', price: '800', category: 'Kitchen Appliances' },
+    { name: 'Cold Press Juicer', price: '1200', category: 'Kitchen Appliances' },
+    { name: 'Hand Mixer', price: '400', category: 'Kitchen Appliances' },
+    { name: 'Scrubber', price: '50', category: 'Kitchen Appliances' }
+  ],
+  'homedecor.html': [
+    { name: 'Wall Art', price: '100', category: 'Home Decor' },
+    { name: 'Decorative Accents', price: '100', category: 'Home Decor' },   
+    { name: 'Table Runners', price: '100', category: 'Home Decor' },
+    { name: 'Throws', price: '100', category: 'Home Decor' },
+    { name: 'Curtains', price: '100', category: 'Home Decor' },
+    { name: 'Table centerpieces', price: '100', category: 'Home Decor' },
+    { name: 'Cushions', price: '100', category: 'Home Decor' },
+    { name: 'Wall Stickers', price: '100', category: 'Home Decor' },
+    { name: 'lamps', price: '100', category: 'Home Decor' },
+    { name: 'Carpets', price: '100', category: 'Home Decor' },
+    { name: 'Mirrors', price: '100', category: 'Home Decor' },
+    { name: 'Accent Pieces', price: '100', category: 'Home Decor' }
+  ],
+  'beauty.html': [
+    { name: 'lipstick', price: '100', category: 'Beauty' },
+    { name: 'Foundation', price: '100', category: 'Beauty' },
+    { name: 'Eye Shadow', price: '100', category: 'Beauty' },
+    { name: 'pocket mirror', price: '100', category: 'Beauty' },
+    { name: 'Perfume', price: '100', category: 'Beauty' },
+    { name: 'Body Lotion', price: '100', category: 'Beauty' },
+    { name: 'Hand Cream', price: '100', category: 'Beauty' },
+    { name: 'Face Mask', price: '100', category: 'Beauty' },
+    { name: 'Makeup Palette', price: '100', category: 'Beauty' },
+    { name: 'Nail Polish', price: '100', category: 'Beauty' },
+    { name: 'Cologne', price: '100', category: 'Beauty' },
+    { name: 'Accessories', price: '100', category: 'Beauty' }
+  ],
+  'stationery.html': [
+    { name: 'Notebooks', price: '100', category: 'Stationery' },
+    { name: 'Desk Accessories', price: '100', category: 'Stationery' },
+    { name: 'Folders', price: '100', category: 'Stationery' },
+    { name: 'Pens', price: '100', category: 'Stationery' },
+    { name: 'Staplers', price: '100', category: 'Stationery' },
+    { name: 'staple pins', price: '100', category: 'Stationery' },
+    { name: 'Clock', price: '100', category: 'Stationery' },
+    { name: 'Exercise Books', price: '100', category: 'Stationery' },
+    { name: 'Erasers', price: '100', category: 'Stationery' },
+    { name: 'Envelopes', price: '100', category: 'Stationery' },
+    { name: 'Markers', price: '100', category: 'Stationery' },
+    { name: 'Glue sticks', price: '100', category: 'Stationery' }
+  ],
+  'premium.html': [
+    { name: 'Premium Shoes', price: '1200', category: 'Premium' },
+    { name: 'Luxury Curtains', price: '1450', category: 'Premium' },
+    { name: 'Premium Backpack', price: '1100', category: 'Premium' },
+    { name: 'Designer Lamp', price: '1350', category: 'Premium' },
+    { name: 'Luxury Watch', price: '1800', category: 'Premium' },
+    { name: 'Leather Bag', price: '1250', category: 'Premium' },
+    { name: 'Premium Wallet', price: '900', category: 'Premium' },
+  ]
+}// Enhanced Cross-Site Search Function
+// Searches through ALL products in allProductsDatabase
+// Parameters: query (string) - the search term entered by user
+// Returns: navigates to the product's page and highlights matching items
 function searchPage(query) {
+  // Convert search term to lowercase for case-insensitive matching
   const searchTerm = query.toLowerCase();
-  const cardSelectors = [
-    '.product-card',
-    '.premium-card',
-    '.decor-card',
-    '.categories-card',
-    '.category-card',
-    '.location-card',
-    '.home-decor-grid .product-card',
-    '.beauty-grid .product-card'
-  ];
-  const cards = Array.from(document.querySelectorAll(cardSelectors.join(',')));
-  let matches = 0;
-  let firstMatch = null;
-
-  cards.forEach(card => {
-    card.classList.remove('search-match');
-    const text = card.textContent.toLowerCase();
-    if (text.includes(searchTerm)) {
-      card.classList.add('search-match');
-      matches += 1;
-      if (!firstMatch) firstMatch = card;
+  // Track results: { pageName, products: [...], count }
+  let results = [];
+  
+  // Loop through each page in the database
+  Object.entries(allProductsDatabase).forEach(([page, products]) => {
+    // Filter products that match the search query
+    const matches = products.filter(product => {
+      const productText = `${product.name} ${product.category} ${product.price}`.toLowerCase();
+      return productText.includes(searchTerm);
+    });
+    
+    // If matches found on this page, add to results
+    if (matches.length > 0) {
+      results.push({ page, products: matches, count: matches.length });
     }
   });
-
-  if (firstMatch) {
-    firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-
-  if (matches > 0) {
-    showToast(`Found ${matches} result${matches === 1 ? '' : 's'} for "${query}"`);
+  
+  // Handle results: display feedback and navigate
+  if (results.length === 0) {
+    // No results found - show toast notification
+    showToast(`❌ No products found for "${query}"`);
   } else {
-    showToast(`No results for "${query}"`);
+    // Results found - navigate to the first matching page
+    const firstResult = results[0];
+    const totalResults = results.reduce((sum, r) => sum + r.count, 0);
+    
+    // Show success notification with result count
+    showToast(`✅ Found ${totalResults} product${totalResults === 1 ? '' : 's'} for "${query}"`);
+    
+    // Redirect to the first matching page
+    window.location.href = firstResult.page + '?search=' + encodeURIComponent(query);
   }
 }
 
@@ -512,6 +581,41 @@ if (document.getElementById('deliveryDate')) {
     injectNavSearchStyles();
     injectNavSearch();
 
+    // Handle search parameter from URL
+    // When redirected from search, highlight matching products on the current page
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchParam = urlParams.get('search');
+    if (searchParam) {
+      const searchTerm = searchParam.toLowerCase();
+      // Select all product cards on current page
+      const cardSelectors = [
+        '.product-card',
+        '.premium-card',
+        '.decor-card',
+        '.categories-card',
+        '.category-card',
+        '.location-card'
+      ];
+      const cards = Array.from(document.querySelectorAll(cardSelectors.join(',')));
+      let firstMatch = null;
+      
+      // Highlight and count matching cards
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+          card.classList.add('search-match');
+          if (!firstMatch) firstMatch = card;
+        }
+      });
+      
+      // Scroll to first match if found
+      if (firstMatch) {
+        setTimeout(() => {
+          firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300);
+      }
+    }
+
     // Attach buy-now click handlers across pages: when a link's text
     // includes "Buy Now" we infer a product and add it to cart.
     // Attach handlers for Buy Now links (keep navigation) and Add-to-Cart buttons (stay on page)
@@ -695,5 +799,3 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
-  
