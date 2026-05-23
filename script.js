@@ -123,6 +123,214 @@ function inferProductInfo(anchor) {
   return { id: name.toLowerCase().replace(/[^a-z0-9]+/g,'_'), name, price };
 }
 
+function injectNavSearch() {
+  const nav = document.querySelector('nav');
+  if (!nav || nav.querySelector('.nav-search')) return;
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'nav-search';
+  wrapper.innerHTML = `
+    <button class="nav-search-toggle" type="button" aria-label="Open search">🔍</button>
+    <form class="nav-search-form" action="#" role="search">
+      <input type="search" class="nav-search-input" placeholder="Search products…" aria-label="Search products">
+      <button type="submit" class="nav-search-button">Search</button>
+    </form>
+  `;
+
+  const logo = nav.querySelector('.logo');
+  if (logo && logo.parentNode === nav) {
+    nav.insertBefore(wrapper, logo.nextSibling);
+  } else {
+    nav.prepend(wrapper);
+  }
+
+  const toggle = wrapper.querySelector('.nav-search-toggle');
+  const form = wrapper.querySelector('.nav-search-form');
+  const input = wrapper.querySelector('.nav-search-input');
+
+  toggle.addEventListener('click', () => {
+    wrapper.classList.toggle('open');
+    if (wrapper.classList.contains('open')) input.focus();
+  });
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const query = input.value.trim();
+    if (!query) {
+      input.focus();
+      return;
+    }
+    searchPage(query);
+    wrapper.classList.remove('open');
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!wrapper.contains(event.target) && wrapper.classList.contains('open')) {
+      wrapper.classList.remove('open');
+    }
+  });
+}
+
+function searchPage(query) {
+  const searchTerm = query.toLowerCase();
+  const cardSelectors = [
+    '.product-card',
+    '.premium-card',
+    '.decor-card',
+    '.categories-card',
+    '.category-card',
+    '.location-card',
+    '.home-decor-grid .product-card',
+    '.beauty-grid .product-card'
+  ];
+  const cards = Array.from(document.querySelectorAll(cardSelectors.join(',')));
+  let matches = 0;
+  let firstMatch = null;
+
+  cards.forEach(card => {
+    card.classList.remove('search-match');
+    const text = card.textContent.toLowerCase();
+    if (text.includes(searchTerm)) {
+      card.classList.add('search-match');
+      matches += 1;
+      if (!firstMatch) firstMatch = card;
+    }
+  });
+
+  if (firstMatch) {
+    firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  if (matches > 0) {
+    showToast(`Found ${matches} result${matches === 1 ? '' : 's'} for "${query}"`);
+  } else {
+    showToast(`No results for "${query}"`);
+  }
+}
+
+function injectNavSearchStyles() {
+  if (document.getElementById('navSearchStyles')) return;
+  const style = document.createElement('style');
+  style.id = 'navSearchStyles';
+  style.textContent = `
+    .nav-search {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .nav-search-form {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-search-input {
+      min-width: 200px;
+      width: 220px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.12);
+      transition: width 0.22s ease, box-shadow 0.22s ease;
+      font-size: 0.95rem;
+      background: rgba(255,255,255,0.96);
+      color: #1a1a1a;
+    }
+
+    .nav-search-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.18);
+    }
+
+    .nav-search-button,
+    .nav-search-toggle {
+      border: none;
+      cursor: pointer;
+      background: var(--primary-yellow);
+      color: var(--dark-bg);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .nav-search-toggle {
+      display: none;
+      background: transparent;
+      color: var(--text-primary);
+      padding: 0 8px;
+    }
+
+    .nav-search-button:hover,
+    .nav-search-toggle:hover {
+      transform: translateY(-1px);
+    }
+
+    .nav-search.open .nav-search-form {
+      display: flex;
+    }
+
+    .search-match {
+      box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.35);
+      border-radius: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-search {
+        order: 3;
+        width: 100%;
+        justify-content: flex-end;
+      }
+      .nav-search-input {
+        min-width: 160px;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-search {
+        position: relative;
+        justify-content: flex-end;
+        gap: 4px;
+      }
+
+      .nav-search-form {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        display: none;
+        flex-direction: column;
+        padding: 14px 16px;
+        background: rgba(255,255,255,0.98);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        gap: 10px;
+        border-radius: 16px;
+        z-index: 1000;
+      }
+
+      .nav-search.open .nav-search-form {
+        display: flex;
+      }
+
+      .nav-search-input {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .nav-search-button {
+        width: 100%;
+      }
+
+      .nav-search-toggle {
+        display: inline-flex;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
 // Set min date for booking if field exists (cart page only)
 // If the cart page's date input exists, set a sensible min date (tomorrow).
 if (document.getElementById('deliveryDate')) {
@@ -301,6 +509,9 @@ if (document.getElementById('deliveryDate')) {
 
   // On DOM ready: wire site-wide Buy Now anchors and render cart page
   document.addEventListener('DOMContentLoaded', () => {
+    injectNavSearchStyles();
+    injectNavSearch();
+
     // Attach buy-now click handlers across pages: when a link's text
     // includes "Buy Now" we infer a product and add it to cart.
     // Attach handlers for Buy Now links (keep navigation) and Add-to-Cart buttons (stay on page)
