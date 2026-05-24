@@ -543,6 +543,67 @@ if (document.getElementById('deliveryDate')) {
     }
   }
 
+  // placeOrderWhatsApp: send order details via WhatsApp
+  function placeOrderWhatsApp() {
+    const customerPhone = document.getElementById('customerPhone').value.trim();
+    
+    if (!customerPhone) {
+      showToast('⚠️ Please enter your phone number');
+      return;
+    }
+
+    // Collect selected items details
+    let orderDetails = '🛒 *Mia Duck Order Details*\n\n';
+    orderDetails += '📞 Customer Phone: ' + customerPhone + '\n\n';
+    orderDetails += '*Items:*\n';
+
+    let subtotal = 0, count = 0;
+    document.querySelectorAll('.cart-item').forEach(item => {
+      if (item.style.display === 'none') return;
+      const cb = item.querySelector('.item-checkbox');
+      if (!cb || !cb.checked) return;
+      
+      const nameEl = item.querySelector('.item-name');
+      const variantEl = item.querySelector('.item-variant');
+      const priceEl = item.querySelector('[data-price]');
+      const qtyEl = item.querySelector('.qty-num');
+      
+      if (!nameEl || !priceEl || !qtyEl) return;
+      
+      const name = nameEl.textContent;
+      const variant = variantEl ? variantEl.textContent : '';
+      const price = parseInt(priceEl.getAttribute('data-price'));
+      const qty = parseInt(qtyEl.value);
+      
+      orderDetails += '• ' + name + (variant ? ' (' + variant + ')' : '') + '\n';
+      orderDetails += '  Qty: ' + qty + ' × KES ' + price.toLocaleString() + ' = KES ' + (price * qty).toLocaleString() + '\n';
+      
+      subtotal += price * qty;
+      count += qty;
+    });
+
+    orderDetails += '\n*Summary:*\n';
+    orderDetails += 'Items: ' + count + '\n';
+    orderDetails += 'Subtotal: KES ' + subtotal.toLocaleString() + '\n';
+    orderDetails += 'Delivery Fee: ' + (deliveryFee === 0 ? 'FREE' : 'KES ' + deliveryFee.toLocaleString()) + '\n';
+    orderDetails += 'Promo Discount: KES ' + promoDiscount + '\n';
+    const total = subtotal + deliveryFee - promoDiscount;
+    orderDetails += '*Total: KES ' + Math.max(0, total).toLocaleString() + '*\n\n';
+    orderDetails += 'Please confirm this order. Thank you! 🎉';
+
+    // Encode the message for URL
+    const encodedMessage = encodeURIComponent(orderDetails);
+    
+    // Create WhatsApp link to the specified number with the message
+    // 0722486463 → +254722486463 (Kenya country code 254)
+    const whatsappNumber = '254722486463'; 
+    const whatsappUrl = 'https://wa.me/' + whatsappNumber + '?text=' + encodedMessage;
+
+    // Open WhatsApp in new tab
+    window.open(whatsappUrl, '_blank');
+    showToast('✅ Opening WhatsApp with your order details…');
+  }
+
   // proceedCheckout: validate minimal address info before checkout
   function proceedCheckout() {
     const name = document.getElementById('addrName').value.trim();
