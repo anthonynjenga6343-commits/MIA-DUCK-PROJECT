@@ -315,6 +315,17 @@
         </div>
         <div class="summary-savings" id="savingsNote">🎉 You're saving KES 3,200 on this order!</div>
 
+        <!-- WhatsApp Order Section -->
+        <div style="margin-bottom: 16px; padding: 12px; background: #f0f0f0; border-radius: 8px; border-left: 4px solid #25D366;">
+          <h3 style="margin: 0 0 12px 0; font-size: 14px; color: var(--dark);">📱 Place Order via WhatsApp</h3>
+          <label style="display: block; font-size: 12px; color: var(--dark); margin-bottom: 6px; font-weight: 600;">Your Phone Number</label>
+          <input type="tel" id="customerPhone" placeholder="e.g. 0712345678" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-family: 'Poppins', sans-serif; margin-bottom: 10px; box-sizing: border-box;"/>
+          <button class="whatsapp-order-btn" onclick="placeOrderWhatsApp()">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-5.031 1.378c-1.567.897-2.545 2.372-2.545 3.997 0 1.9.823 3.638 2.322 4.908l-.321 1.775 1.823-.581c1.243.96 2.861 1.544 4.666 1.544 5.193 0 9.439-4.3 9.439-9.543 0-2.51-.967-4.868-2.724-6.653-1.757-1.784-4.07-2.87-6.635-2.87z"/></svg>
+            Place Order on WhatsApp
+          </button>
+        </div>
+
         <button class="checkout-btn" onclick="proceedCheckout()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
           Proceed to Checkout
