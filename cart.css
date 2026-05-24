@@ -838,3 +838,30 @@ nav:hover {
 /* Small added state for button */
 .add-to-cart-btn.added { background: #e6e6e6; color: #333; }
 
+/* WhatsApp Order Button */
+.whatsapp-order-btn {
+  width: 100%;
+  padding: 13px;
+  background: #25D366;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.whatsapp-order-btn:hover {
+  background: #1ead50;
+}
+
+.whatsapp-order-btn:active {
+  transform: scale(0.98);
+}
+
